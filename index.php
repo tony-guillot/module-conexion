@@ -10,7 +10,7 @@
     <main>
 
     <h1>Module de conexion</h1>
-    <a href="inscription.php">Acceder au module de conexion</a>
+    <a href="inscription1.php">Acceder au module de conexion</a>
 
 
 
