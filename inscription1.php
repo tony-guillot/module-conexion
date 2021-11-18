@@ -38,53 +38,82 @@
 <?php
 
 $servname = 'localhost';
-$dbname = 'moduleconnexion'; 
+$dbname = 'moduleconnexion';  // log de connexion à la bdd 
 $user = 'root';
 $mdp ='';
 
 
 
 try{
-$bdd = new PDO("mysql:host=$servname;dbname=$dbname","$user","$mdp");
+$bdd = new PDO("mysql:host=$servname;dbname=$dbname","$user","$mdp");//connexion à la bdd
 $bdd-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$sql = $bdd->prepare(
-
-        "INSERT INTO utilisateurs(nom,prenom,login,password)
-        VALUES (:nom,:prenom,:login,:password)"
-        
-    );
-        
-
-$sql->bindParam(':nom', $nom);
-$sql->bindParam(':prenom', $prenom);
-$sql->bindParam(':login', $login);
-$sql->bindParam(':password', $password);
-
-
-
-$nom = $_POST['nom'];
-$prenom = $_POST['prenom'];
-$login = $_POST['user'];
-$password = $_POST['mdp'];
-$sql->execute();
-
-$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
 }
-
 catch(PDOException $e){
 
     echo 'echec : ' .$e->getMessage();
 }
 
-if (password_verify($password, $hashed_password)){
-    
-    echo 'Password Matches';
-}else {
-    
-    echo 'Password Mismatch';
+
+$sql = $bdd->prepare(
+
+        "INSERT INTO utilisateurs(nom,prenom,login,password) 
+        VALUES (:nom,:prenom,:login,:password)"
+        
+    );
+        // prépare l'insertion des valeurs dans la bdd
+
+$sql->bindParam(':nom', $nom);
+$sql->bindParam(':prenom', $prenom); // 
+$sql->bindParam(':login', $login);
+$sql->bindParam(':password', $hashed_password);
+// on définit les valeurs des differentes entrées dans VALUES 
+
+
+$nom = $_POST['nom'];
+$prenom = $_POST['prenom']; // assosiation des valeur du formulaire POST aux variables
+$login = $_POST['user'];
+$password = $_POST['mdp'];
+$hashed_password = password_hash($password, PASSWORD_DEFAULT); 
+$passwordCorrect = password_verify($password, $hashed_password);
+//password_hash pour crypter le mdp, a mettre avant  execute()
+
+
+$usercheck = $pdo->prepare
+
+
+
+
+
+
+if($password != $_POST['confirmer']){
+
+        die('les mots de passe ne sont pas identique ');
 }
+    else{
+
+    $sql->execute();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var_dump($hashed_password);
 
