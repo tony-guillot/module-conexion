@@ -10,11 +10,19 @@
     <main>
 
     <h1>Module de conexion</h1>
-    <a href="inscription1.php">Acceder au module de conexion</a>
+    <button><a href="inscription1.php">Inscription</a></button>
+    <button><a href="connexion.php">Connexion</a></button>
 
+    <?php
 
+    if(isset($_SESSION['login']))
+{
+    echo "Vous êtes connecté";
+}
 
+?>
 
     </main>
 </body>
 </html>
+

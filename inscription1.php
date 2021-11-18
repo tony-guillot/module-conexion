@@ -9,6 +9,7 @@
 </head>
 <body>
     <form action="#" method="post" >
+
         <label>Nom</label>      
         <input type="text" name='nom' autocomplete='off' required>
 
@@ -98,7 +99,8 @@ $stmt ->bindValue(':password', $password, PDO::PARAM_STR);
 
             echo 'inscription reussi';
         }else{
-
+            
+           
             echo 'echec de l\'inscritpion';
         }
 
