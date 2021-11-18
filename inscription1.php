@@ -49,50 +49,60 @@ $bdd = new PDO("mysql:host=$servname;dbname=$dbname","$user","$mdp");//connexion
 $bdd-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 }
+
 catch(PDOException $e){
 
     echo 'echec : ' .$e->getMessage();
 }
 
-
-$sql = $bdd->prepare(
-
-        "INSERT INTO utilisateurs(nom,prenom,login,password) 
-        VALUES (:nom,:prenom,:login,:password)"
-        
-    );
-        // prépare l'insertion des valeurs dans la bdd
-
-$sql->bindParam(':nom', $nom);
-$sql->bindParam(':prenom', $prenom); // 
-$sql->bindParam(':login', $login);
-$sql->bindParam(':password', $hashed_password);
-// on définit les valeurs des differentes entrées dans VALUES 
+@$login = $_POST['user'];
+@$nom =$_POST['nom'];
+@$prenom = $_POST['prenom'];
+@$password = $_POST['mdp'];
+@$confir = $_POST['confirm'];
 
 
-$nom = $_POST['nom'];
-$prenom = $_POST['prenom']; // assosiation des valeur du formulaire POST aux variables
-$login = $_POST['user'];
-$password = $_POST['mdp'];
-$hashed_password = password_hash($password, PASSWORD_DEFAULT); 
-$passwordCorrect = password_verify($password, $hashed_password);
-//password_hash pour crypter le mdp, a mettre avant  execute()
+@$login = htmlspecialchars(trim($login));
+@$nom = htmlspecialchars(trim($nom));
+@$prenom = htmlspecialchars(trim($prenom));
+@$password = htmlspecialchars(trim($password));
 
+$sql = "SELECT COUNT(login) AS num FROM utilisateurs WHERE login=:login";
+$stmt =$bdd->prepare($sql);
+$stmt->bindValue(':login', $login);
+$stmt->execute();
 
-$usercheck = $pdo->prepare
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+if($row['num'] > 0){
 
+    echo 'le nom d\'utilisateur est dejà pris';
 
+}elseif($_POST['mdp'] != $_POST['confirmer']){
 
-
-
-if($password != $_POST['confirmer']){
-
-        die('les mots de passe ne sont pas identique ');
+    die('les mots de passe se sont pas identique');
 }
+
     else{
 
-    $sql->execute();
+$password = password_hash($password, PASSWORD_BCRYPT);
+$sql2 = "INSERT INTO utilisateurs (login,nom,prenom,password)VALUES(:login, :nom, :prenom, :password)"; 
+$stmt = $bdd->prepare($sql2);
+$stmt ->bindValue(':login', $login, PDO::PARAM_STR);
+$stmt ->bindValue(':nom', $nom, PDO::PARAM_STR);
+$stmt ->bindValue(':prenom', $prenom, PDO::PARAM_STR);
+$stmt ->bindValue(':password', $password, PDO::PARAM_STR);
+    
+
+        if($stmt->execute()){
+
+            echo 'inscription reussi';
+        }else{
+
+            echo 'echec de l\'inscritpion';
+        }
+
+    
 }
 
 
@@ -115,5 +125,24 @@ if($password != $_POST['confirmer']){
 
 
 
-var_dump($hashed_password);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
