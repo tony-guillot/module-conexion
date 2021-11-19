@@ -96,10 +96,19 @@ $stmt ->bindValue(':prenom', $prenom, PDO::PARAM_STR);
 $stmt ->bindValue(':password', $password, PDO::PARAM_STR);
     
 
-        if($stmt->execute()){
+        if(empty($_POST['login']) && empty($_POST['password'])){
 
+            die();
+
+        }elseif($stmt->execute()){
+
+            
             echo 'inscription reussi';
-        }else{
+
+         
+           }   
+            
+        else{
             
            
             echo 'echec de l\'inscritpion';

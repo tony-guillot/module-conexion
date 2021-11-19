@@ -13,7 +13,7 @@
     <input type="text" name="login" require>
 
     <label>password</label>
-    <input type="password" name=password require>
+    <input type="password" name='password' require>
 
     <input type="submit"  name ='valider'value="valider">
 </form>
@@ -85,4 +85,4 @@ $mdp ='';
         }
        
     }
-    
+     
