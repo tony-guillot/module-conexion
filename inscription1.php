@@ -37,6 +37,7 @@
 </html>
 
 <?php
+session_start();
 
 $servname = 'localhost';
 $dbname = 'moduleconnexion';  // log de connexion à la bdd 

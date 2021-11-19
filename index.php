@@ -14,11 +14,17 @@
     <button><a href="connexion.php">Connexion</a></button>
 
     <?php
+    
 
-    if(isset($_SESSION['login']))
-{
-    echo "Vous êtes connecté";
-}
+        
+
+//     if(isset($_SESSION['login']))
+// {
+//     echo "Vous êtes connecté"   .$_SESSION['login'];
+// }else{
+     
+//     echo 'vous êtes deconnecté';
+// }
 
 ?>
 
