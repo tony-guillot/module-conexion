@@ -45,7 +45,11 @@ $mdp ='';
                     $_SESSION['login'] = $userinfo['login'];
                     $_SESSION['nom'] = $userinfo['nom'];
                     $_SESSION['prenom'] = $userinfo['prenom'];
-                
+
+                if($userinfo['login'] == 'admin'){
+
+                    header('location: admin.php');
+                }
             }else{
 
                 echo 'Mauvais nom d\utilisateur ou mot de passe';
