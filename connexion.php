@@ -1,27 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-<form action="#" method="post">
-    <label>Login</label>
-    <input type="text" name="login" require>
 
-    <label>password</label>
-    <input type="password" name='password' require>
-
-    <input type="submit"  name ='valider'value="valider">
-</form>
-</body>
-</html>
-
-<?php
+ <?php
 session_start();
+
+
+
+
+
 
 
 
@@ -29,7 +13,6 @@ $servname = 'localhost';
 $dbname = 'moduleconnexion';  // log de connexion à la bdd 
 $user = 'root';
 $mdp ='';
-
 
 
  try{
@@ -44,45 +27,78 @@ $mdp ='';
          echo 'echec : ' .$e->getMessage();
      }
         
-        // Si l'entrée de login et le mot de passe ont une valeur 
-        if(isset($_POST['login']) && isset($_POST['password'])){
+        if(isset($_POST['valider'])){
 
-            //si login n'est pas vide et que password a une valeur
-            if(!empty($_POST['login']) && isset($_POST['password'])){
+            $login = htmlspecialchars($_POST['login']);
+            $password = htmlspecialchars($_POST['password']);
 
-                // alors la variable login = l'entrée de login 
-                $login = $_POST['login'];
+            if(!empty($login) && !empty($password)){
 
-                // requete SQL 
-                $req = $bdd->prepare('SELECT login,password FROM utilisateurs WHERE login=:login');
-                $req->bindValue(':login', $login); // association des valeurs de :login
-                $req->execute(); // execute la requete SQL
+                $requser = $bdd->prepare("SELECT * FROM utilisateurs WHERE  login=?");
+                $requser->execute(array($login));
+                $userexist = $requser->rowCount();
+
+                if($userexist == 1){
+                    
+                    $userinfo = $requser->fetch();
+                    $_SESSION['id'] = $userinfo['id'];
+                    $_SESSION['login'] = $userinfo['login'];
+                    $_SESSION['nom'] = $userinfo['nom'];
+                    $_SESSION['prenom'] = $userinfo['prenom'];
                 
-               
-                
-                
-            $resultat = $req->fetch(); // récupère les valeurs de la requete SQL stocké sur la BDD 
+            }else{
 
-            //on verify si le mot de pass correspont au mot de pass hash de la basse de donné 
-            if (!$resultat OR !password_verify($_POST['password'], $resultat['password'])){
-
-
-                echo 'Identifiant ou mot de passe incorrect';
-                
+                echo 'Mauvais nom d\utilisateur ou mot de passe';
+            }
+            }
             
-              }
-            
-              
-              else{
-
-                echo 'Vous êtes connecté';
-              }
-            
-              
-        }else{
-
-            echo 'Renseigner un Nom d\'utilisateur et un mot de passe';
         }
-       
-    }
-     
+    
+?>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>connexion</title>
+</head>
+<body>
+
+
+    
+    
+<form action="#" method="post">
+    <label>Nom d'utilisateur</label>
+    <input type="text" name="login" require>
+
+    <label>Mot de passe</label>
+    <input type="password" name='password' require>
+   
+
+    <input type="submit"  name ='valider'value="valider">
+
+
+    <div class="profil">
+             <h2>Profil de <?php echo $userinfo['login'];?>
+             <br></br>
+            
+             nom :  <?php echo $userinfo['nom'];?>
+             <br></br>
+
+             Prenom : <?php echo $userinfo['prenom'];?>
+
+            </h2>
+            
+            <button ><a href="deconnexion">Se deconnecter</a></button>
+
+            <a href="profil1.php">Modifier mon profil</a>
+         </div>
+
+</form>
+
+
+</body>
+</html>
+
+<?php

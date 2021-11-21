@@ -1,3 +1,10 @@
+<?php
+
+session_start();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +19,7 @@
     <h1>Module de conexion</h1>
     <button><a href="inscription1.php">Inscription</a></button>
     <button><a href="connexion.php">Connexion</a></button>
-    <button><a href="profil.php">Modifier votre profil </a></button>
+    <button><a href="profil1.php">Modifier votre profil </a></button>
     <?php
     
 

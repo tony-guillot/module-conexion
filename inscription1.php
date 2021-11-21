@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -37,7 +41,7 @@
 </html>
 
 <?php
-session_start();
+
 
 $servname = 'localhost';
 $dbname = 'moduleconnexion';  // log de connexion à la bdd 
@@ -61,7 +65,7 @@ catch(PDOException $e){
 @$nom =$_POST['nom'];
 @$prenom = $_POST['prenom'];
 @$password = $_POST['mdp'];
-@$confir = $_POST['confirm'];
+@$confir = $_POST['confirmer'];
 
 
 @$login = htmlspecialchars(trim($login));
@@ -76,15 +80,15 @@ $stmt->execute();
 
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if($row['num'] > 0){
+        if($row['num'] > 0 ){
 
-    echo 'le nom d\'utilisateur est dejà pris';
+            echo 'le nom d\'utilisateur est dejà pris';
 
-}elseif($_POST['mdp'] != $_POST['confirmer']){
+        }elseif($_POST['mdp'] != $_POST['confirmer']){
 
-    die('les mots de passe se sont pas identique');
-}
-
+            die('les mots de passe se sont pas identique');
+        }
+            
     else{
 
 $password = password_hash($password, PASSWORD_BCRYPT);
@@ -96,28 +100,22 @@ $stmt ->bindValue(':prenom', $prenom, PDO::PARAM_STR);
 $stmt ->bindValue(':password', $password, PDO::PARAM_STR);
     
 
-        if(empty($_POST['login']) && empty($_POST['password'])){
-
-            die();
-
-        }elseif($stmt->execute()){
+        if($stmt->execute()){
 
             
             echo 'inscription reussi';
 
-         
-           }   
-            
-        else{
-            
-           
+           }else{
+
             echo 'echec de l\'inscritpion';
         }
 
     
-}
+    }
 
 
+
+    
 
 
 
