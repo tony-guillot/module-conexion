@@ -1,5 +1,4 @@
-
- <?php
+<?php
 session_start();
 
 
@@ -19,45 +18,53 @@ $mdp ='';
     $bdd = new PDO("mysql:host=$servname;dbname=$dbname","$user","$mdp");//connexion à la bdd
      $bdd-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    }
+    
     
     // message en cas d'erreur 
-    catch(PDOException $e){
-    
-         echo 'echec : ' .$e->getMessage();
-     }
+ 
         
         if(isset($_POST['valider'])){
 
             $login = htmlspecialchars($_POST['login']);
-            $password = htmlspecialchars($_POST['password']);
-
+            $password = sha1($_POST['password']);
+            
+            
+           
             if(!empty($login) && !empty($password)){
 
-                $requser = $bdd->prepare("SELECT * FROM utilisateurs WHERE  login=?");
-                $requser->execute(array($login));
+                $requser = $bdd->prepare("SELECT * FROM utilisateurs WHERE login=:login AND password=:password");
+                $requser->bindValue(':login', $login);
+                $requser->bindValue(':password', $password);
+                $requser->execute(); 
                 $userexist = $requser->rowCount();
 
-                if($userexist == 1){
+                if($userexist == 1 ){
                     
                     $userinfo = $requser->fetch();
                     $_SESSION['id'] = $userinfo['id'];
                     $_SESSION['login'] = $userinfo['login'];
                     $_SESSION['nom'] = $userinfo['nom'];
                     $_SESSION['prenom'] = $userinfo['prenom'];
-
+                    $_SESSION['password'] = $userinfo['password'];
+                    
+                
                 if($userinfo['login'] == 'admin'){
 
                     header('location: admin.php');
                 }
+
             }else{
 
-                echo 'Mauvais nom d\utilisateur ou mot de passe';
+                echo 'Mauvais mot de passe ou identifiant';
             }
             }
             
         }
+     
+}   catch(PDOException $e){
     
+    echo 'echec : ' .$e->getMessage();
+}
 ?>
     <!DOCTYPE html>
 <html lang="en">
@@ -65,14 +72,25 @@ $mdp ='';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="connexion.css">
     <title>connexion</title>
 </head>
 <body>
-
+<header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.php">Accueil</a>
+                    <a href="connexion.php">Connexion</a>
+                    <a href="profil1.php">Inscription</a>
+                </li>
+            </ul> 
+        </nav>
+    </header>
 
     
-    
-<form action="#" method="post">
+    <main class="main2 ">
+    <form class="formulaire2" action="#" method="post">
     <label>Nom d'utilisateur</label>
     <input type="text" name="login" require>
 
@@ -84,25 +102,24 @@ $mdp ='';
 
 
     <div class="profil">
-             <h2>Profil de <?php echo $userinfo['login'];?>
-             <br></br>
+             <h2>Profil de <?php echo @$userinfo['login'];?></h2>
+ 
             
-             nom :  <?php echo $userinfo['nom'];?>
-             <br></br>
+            <h3>nom :  <?php echo @$userinfo['nom'];?></h3>
+             
 
-             Prenom : <?php echo $userinfo['prenom'];?>
+             <h3>Prenom : <?php echo @$userinfo['prenom'];?> </h3>
 
-            </h2>
+            
             
             <button ><a href="deconnexion">Se deconnecter</a></button>
 
             <a href="profil1.php">Modifier mon profil</a>
          </div>
-
+</main>
 </form>
 
 
 </body>
 </html>
 
-<?php

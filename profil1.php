@@ -41,16 +41,16 @@ if(isset($_SESSION['id'])){
     }
     
 
-    if( isset($_POST['newmpd']) AND !empty($_POST['newmdp']) AND isset($_POST['newmdp2']) AND  !empty(['newmdp2']) AND !password_verify($_POST['newmdp'], $user['login']) AND !password_verify($_POST['newmdp2'], $user['login'])){
+    if(isset($_POST['newmdp']) AND !empty($_POST['newmdp']) AND isset($_POST['newmdp2']) AND !empty($_POST['newmdp2'])) {
 
        
-        $mdp1 = $_POST['newmdp'];
-        $mdp2 = $_POST['newmdp2'];
+        $mdp1 = sha1($_POST['newmdp']);
+        $mdp2 = sha1($_POST['newmdp2']);
         
-        if($mdp == $mdp2){
+        if($mdp1 == $mdp2){
 
             $insertmdp = $bdd->prepare("UPDATE utilisateurs  SET  password=? WHERE id=?");
-            $insertmdp->execute(array($mdp1, $_SESSION['ID']));
+            $insertmdp->execute(array($mdp1, $_SESSION['id']));
             header('location: connexion.php');
 
         }else{
@@ -58,7 +58,11 @@ if(isset($_SESSION['id'])){
         }
         
     }
-
+}
+} catch(PDOException $e){
+    
+    echo 'echec : ' .$e->getMessage();
+}
 
 ?>
 
@@ -110,28 +114,3 @@ if(isset($_SESSION['id'])){
 
 
 
-<?php
-    $requser = $bdd->prepare("SELECT * FROM utilisateurs WHERE id = ? ");
-    $requser->execute(array($_SESSION['id']));
-    $user = $requser->fetch();
-
-
-}
-
-else{
-    
-    header('location: connexion.php');
-
-}
-
-}catch(PDOException $e){
-    
-    echo 'echec : ' .$e->getMessage();
-}
-
-           
-
-
-
-        
-    

@@ -8,11 +8,27 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="module.css">
     <title>Document</title>
 </head>
 <body>
-    <form action="#" method="post" >
+
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.php">Accueil</a>
+                    <a href="">Connexion</a>
+                    <a href="">Inscription</a>
+                </li>
+            </ul> 
+        </nav>
+    </header>
+
+    <main >
+    <form class="formulaire" action="#" method="post" >
+        
+        <h1>Inscription</h1>
 
         <label>Nom</label>      
         <input type="text" name='nom' autocomplete='off' required>
@@ -37,6 +53,7 @@ session_start();
         <input type="submit" name="valider" >
         
     </form>
+</main>
 </body>
 </html>
 
@@ -64,8 +81,8 @@ catch(PDOException $e){
 @$login = $_POST['user'];
 @$nom =$_POST['nom'];
 @$prenom = $_POST['prenom'];
-@$password = $_POST['mdp'];
-@$confir = $_POST['confirmer'];
+@$password = sha1($_POST['mdp']);
+@$confir = sha1($_POST['confirmer']);
 
 
 @$login = htmlspecialchars(trim($login));
@@ -91,7 +108,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
             
     else{
 
-$password = password_hash($password, PASSWORD_BCRYPT);
+
 $sql2 = "INSERT INTO utilisateurs (login,nom,prenom,password)VALUES(:login, :nom, :prenom, :password)"; 
 $stmt = $bdd->prepare($sql2);
 $stmt ->bindValue(':login', $login, PDO::PARAM_STR);
