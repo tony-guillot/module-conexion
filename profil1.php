@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 $servname = 'localhost';
@@ -72,30 +71,56 @@ if(isset($_SESSION['id'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>modification du profil</title>
 </head>
 <body>
-            <div class="editprofil">
+    <header>
+            <nav>
+                <ul>
+                     <li>
+                        <a href="index.php">Accueil</a>
+                        <a href="connexion.phh">Connexion</a>
+                        <a href="inscription.php">Inscription</a>
+                    </li>
+                </ul> 
+            </nav>
+    </header>
+            <main class="container1">
+
+                
+
+                <form classe="formulaire3" action="#" method="post">
+
                 <h2>Modification de mon profil</h2>
 
-                <form action="#" method="post">
                 <label>Nom :</label>
-                    <input type="text" name="newnom" placeholder="nom" value="<?php echo $user['nom']?>"> <br /><br />
+                <br>  
+                    <input type="text" name="newnom" placeholder="nom" value="<?php echo $user['nom']?>">
+                    <br>  
 
                     <label>Prenom : </label>
-                    <input type="text" name="newprenom" placeholder="prenom" value="<?php echo $user['prenom']?>"> <br /><br />
+                    <br>  
+                    <input type="text" name="newprenom" placeholder="prenom" value="<?php echo $user['prenom']?>"><br>  
 
                     <label>Nom d'utilisateur</label>
-                    <input type="text" name="newlogin" placeholder="nom d'utilisateur" value="<?php echo $user['login']?>"> <br /><br />
+                    <br>  
+                    <input type="text" name="newlogin" placeholder="nom d'utilisateur" value="<?php echo $user['login']?>"> <br>  
 
                     <label>Mot de passe</label> 
-                    <input type="password" name='newmdp' placeholder="mot de passe" ><br /><br />
+                    <br>  
+                    <input type="password" name='newmdp' placeholder="mot de passe" >
+                    <br>  
 
                     <label>Confirmer le mot de passe</label>
-                    <input type="password" name='newmdp2' placeholder="Confirmer le   mot de passe"><br /><br />
-                    <input type="submit" value="Modifier mon profil"><br /><br />
+                    <br>  
+                    <input type="password" name='newmdp2' placeholder="Confirmer le   mot de passe">
+
+                    <input  id='modifier' type="submit" value="Modifier">
+                    
                 </form>
-            </div>
+
+</main>
 </body>
 </html>
 

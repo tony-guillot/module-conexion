@@ -1,13 +1,6 @@
 <?php
 session_start();
 
-
-
-
-
-
-
-
 $servname = 'localhost';
 $dbname = 'moduleconnexion';  // log de connexion à la bdd 
 $user = 'root';
@@ -55,7 +48,7 @@ $mdp ='';
 
             }else{
 
-                echo 'Mauvais mot de passe ou identifiant';
+                echo '<p class="erreur">'.'Mauvais identifiant ou mot de passe'. '</p>';
             }
             }
             
@@ -72,7 +65,7 @@ $mdp ='';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="connexion.css">
+    <link rel="stylesheet" href="style.css">
     <title>connexion</title>
 </head>
 <body>
@@ -82,7 +75,7 @@ $mdp ='';
                 <li>
                     <a href="index.php">Accueil</a>
                     <a href="connexion.php">Connexion</a>
-                    <a href="profil1.php">Inscription</a>
+                    <a href="insription1.php">Inscription</a>
                 </li>
             </ul> 
         </nav>
@@ -90,19 +83,30 @@ $mdp ='';
 
     
     <main class="main2 ">
-    <form class="formulaire2" action="#" method="post">
-    <label>Nom d'utilisateur</label>
-    <input type="text" name="login" require>
 
-    <label>Mot de passe</label>
-    <input type="password" name='password' require>
+        <div class="container2">
+    <form class="formulaire2" action="#" method="post">
+
+    <h1>Connexion</h1>
+    <br>
+
+         <label>Nom d'utilisateur</label>
+         <br>
+        <input type="text" name="login" require>
+
+        <label>Mot de passe</label>
+        <br>
+        <input type="password" name='password' require>
    
 
-    <input type="submit"  name ='valider'value="valider">
+        <input type="submit"   name ='valider'value="valider">
 
+    </form>
+            </div>
 
-    <div class="profil">
-             <h2>Profil de <?php echo @$userinfo['login'];?></h2>
+            <div class="profil">
+
+             <h2 id="connexion">Profil de <?php echo @$userinfo['login'];?></h2>
  
             
             <h3>nom :  <?php echo @$userinfo['nom'];?></h3>
@@ -117,7 +121,7 @@ $mdp ='';
             <a href="profil1.php">Modifier mon profil</a>
          </div>
 </main>
-</form>
+
 
 
 </body>

@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -8,7 +10,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="module.css">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
@@ -18,36 +20,43 @@ session_start();
             <ul>
                 <li>
                     <a href="index.php">Accueil</a>
-                    <a href="">Connexion</a>
-                    <a href="">Inscription</a>
+                    <a href="connexion.php">Connexion</a>
+                    <a href="inscription.php">Inscription</a>
                 </li>
             </ul> 
         </nav>
     </header>
 
-    <main >
-    <form class="formulaire" action="#" method="post" >
+    <main class="container1">
+        
+        <form class="formulaire" action="#" method="post" >
         
         <h1>Inscription</h1>
 
-        <label>Nom</label>      
+        <label>Nom</label>   
+        <br>   
         <input type="text" name='nom' autocomplete='off' required>
 
         <label>Prenom</label>
+        <br>
         <input type="text" name='prenom' autocomplete='off' required>
         
 
         <label>Nom d'utilisateur</label>
+        <br>
         <input type="text" name="user" autocomplete='off' required>
         
 
         <label>Mot de passe</label> 
+        <br>
         <input type="password" name="mdp" autocomplete='off' required>
         
 
 
         <label>Confirmer le mot de passe</label>
+        <br>
         <input type="password" name="confirmer" autocomplete='off' required>
+
         
 
         <input type="submit" name="valider" >
@@ -99,7 +108,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if($row['num'] > 0 ){
 
-            echo 'le nom d\'utilisateur est dejà pris';
+            echo '<p class="erreur"> ' .'le nom d\'utilisateur est dejà pris'. '</p>';
 
         }elseif($_POST['mdp'] != $_POST['confirmer']){
 
