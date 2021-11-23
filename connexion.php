@@ -25,25 +25,25 @@ $mdp ='';
            
             if(!empty($login) && !empty($password)){
 
-                $requser = $bdd->prepare("SELECT * FROM utilisateurs WHERE login=:login AND password=:password");
-                $requser->bindValue(':login', $login);
+                $requser = $bdd->prepare("SELECT * FROM utilisateurs WHERE login=:login AND password=:password"); // selection de tout le table utilisateur de la bdd 
+                $requser->bindValue(':login', $login); // bind des valeurs 
                 $requser->bindValue(':password', $password);
-                $requser->execute(); 
-                $userexist = $requser->rowCount();
+                $requser->execute();  // execution de la requete 
+                $userexist = $requser->rowCount();// rowcount permet de compter le nombre le valeurs dans la requete 
 
-                if($userexist == 1 ){
+                if($userexist == 1 ){ // si le resultat de rowcount est superieur a 0 alors on assosie les variable de session au fetch de la requete SQL 
                     
                     $userinfo = $requser->fetch();
                     $_SESSION['id'] = $userinfo['id'];
-                    $_SESSION['login'] = $userinfo['login'];
+                    $_SESSION['login'] = $userinfo['login']; 
                     $_SESSION['nom'] = $userinfo['nom'];
                     $_SESSION['prenom'] = $userinfo['prenom'];
                     $_SESSION['password'] = $userinfo['password'];
-                    
+                    // le fetch recupère les valeurs de la requete SQL, puis on lui associe les variables de session.
                 
                 if($userinfo['login'] == 'admin'){
 
-                    header('location: admin.php');
+                    header('location: admin.php'); //si de nom d'utilisateur est admin alors redirection vers la page admin 
                 }
 
             }else{
@@ -75,7 +75,8 @@ $mdp ='';
                 <li>
                     <a href="index.php">Accueil</a>
                     <a href="connexion.php">Connexion</a>
-                    <a href="insription1.php">Inscription</a>
+                    <a href="inscription1.php">Inscription</a>
+                    <a href="profil1.php">Modifier le profil</a>
                 </li>
             </ul> 
         </nav>
@@ -103,13 +104,14 @@ $mdp ='';
 
     </form>
             </div>
+            
 
             <div class="profil">
 
              <h2 id="connexion">Profil de <?php echo @$userinfo['login'];?></h2>
  
             
-            <h3>nom :  <?php echo @$userinfo['nom'];?></h3>
+            <h3>nom :  <?php echo @$userinfo['nom'];?></h3> 
              
 
              <h3>Prenom : <?php echo @$userinfo['prenom'];?> </h3>
@@ -122,7 +124,22 @@ $mdp ='';
          </div>
 </main>
 
+<footer class="footer">
 
+<ul class="navigation">
+    <h3 class="navi">Navigation</h3>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="voyage6.html">Contactez-nous</a></li>
+</ul>
+
+<ul class="contact">
+    <h3 class="info">Mes informations</h3>
+    <li>Tony Guillot</li>
+    <li>Tony.guillot@laplateforme.io</li>
+    <li><a href="https://github.com/tony-guillot/module-connexion.git">Repository Github</a></li>
+</ul>
+
+</footer>
 
 </body>
 </html>

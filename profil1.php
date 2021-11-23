@@ -80,47 +80,63 @@ if(isset($_SESSION['id'])){
                 <ul>
                      <li>
                         <a href="index.php">Accueil</a>
-                        <a href="connexion.phh">Connexion</a>
-                        <a href="inscription.php">Inscription</a>
+                        <a href="connexion.php">Connexion</a>
+                        <a href="inscription1.php">Inscription</a>
+                        <a href="profil1.php">Modifier le profil</a>
                     </li>
                 </ul> 
             </nav>
     </header>
-            <main class="container1">
+            <main class="modif1">
 
                 
 
-                <form classe="formulaire3" action="#" method="post">
+                <form classe="modif" action="#" method="post">
 
                 <h2>Modification de mon profil</h2>
 
                 <label>Nom :</label>
-                <br>  
-                    <input type="text" name="newnom" placeholder="nom" value="<?php echo $user['nom']?>">
-                    <br>  
+                
+                    <input classe ="input-profil" type="text" name="newnom" placeholder="nom" value="<?php echo @$user['nom']?>">
+                    
 
                     <label>Prenom : </label>
-                    <br>  
-                    <input type="text" name="newprenom" placeholder="prenom" value="<?php echo $user['prenom']?>"><br>  
+                    
+                    <input classe ="input-profil" type="text" name="newprenom" placeholder="prenom" value="<?php echo @$user['prenom']?>"><br>  
 
                     <label>Nom d'utilisateur</label>
-                    <br>  
-                    <input type="text" name="newlogin" placeholder="nom d'utilisateur" value="<?php echo $user['login']?>"> <br>  
+                    <input type="text" name="newlogin" placeholder="nom d'utilisateur" value="<?php echo @$user['login']?>">
 
                     <label>Mot de passe</label> 
-                    <br>  
-                    <input type="password" name='newmdp' placeholder="mot de passe" >
-                    <br>  
+                    <input classe ="input-profil" type="password" name='newmdp' placeholder="mot de passe" >
+                      
 
                     <label>Confirmer le mot de passe</label>
-                    <br>  
-                    <input type="password" name='newmdp2' placeholder="Confirmer le   mot de passe">
+                    
+                    <input classe ="input-profil" type="password" name='newmdp2' placeholder="Confirmer le   mot de passe">
 
                     <input  id='modifier' type="submit" value="Modifier">
                     
                 </form>
 
 </main>
+
+<footer class="footer">
+
+<ul class="navigation">
+    <h3 class="navi">Navigation</h3>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="voyage6.html">Contactez-nous</a></li>
+</ul>
+
+<ul class="contact">
+    <h3 class="info">Mes informations</h3>
+    <li>Tony Guillot</li>
+    <li>Tony.guillot@laplateforme.io</li>
+    <li><a href="https://github.com/tony-guillot/module-connexion.git">Repository Github</a></li>
+</ul>
+
+</footer>
 </body>
 </html>
 

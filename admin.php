@@ -28,23 +28,41 @@ $utilisateurs = $bdd->query("SELECT * FROM utilisateurs ORDER BY id DESC");
                      <li>
                         <a href="index.php">Accueil</a>
                         <a href="connexion.php">Connexion</a>
-                        <a href="inscription.php">Inscription</a>
+                        <a href="inscription1.php">Inscription</a>
+                        <a href="profil1.php">Modifier le profil</a>
                     </li>
                 </ul> 
             </nav>
+            <ul>
     </header>
 
             <h1 id="admin">Page Administrateur</h1>
-    <ul>
+    
         
             <?php while($u = $utilisateurs->fetch()) {?>
 
-                    <li id="admin2"> <?= $u['id'] ?> : <?= $u['login']?> : <?= $u['nom']?> : <?= $u['prenom']?> </li>
+                    <li id="admin2"> <?php echo $u['id'] ?> : <?php echo $u['login']?> : <?php echo$u['nom']?> : <?php echo $u['prenom']?> </li>
                     
-                    <?php } ?>
+                    <?php } ?> 
                 
+                    
         
-    </ul>
+    
+<footer class="footer">
+
+<ul class="navigation">
+    <h3 class="navi">Navigation</h3>
+    <li><a href="index.php">Connexion</a></li>
+    <li><a href="conneion.php">connexion</a></li>
+    <li><a href="inscription.php">inscription</a></li>
+</ul>
+
+<ul class="contact">
+    <h3 class="info">Mes informations</h3>
+    <li>Tony Guillot</li>
+    <li>Tony.guillot@laplateforme.io</li>
+    <li><a href="https://github.com/tony-guillot/module-connexion.git">Repository Github</a></li>
+</ul>
 </body>
 </html>
 

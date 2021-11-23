@@ -20,7 +20,9 @@ session_start();
                 <li>
                     <a href="index.php">Accueil</a>
                     <a href="connexion.php">Connexion</a>
-                    <a href="insription1.php">Inscription</a>
+                    <a href="inscription1.php">Inscription</a>
+                    <a href="profil1.php">Modifier le profil</a>
+                    
                 </li>
             </ul> 
         </nav>
@@ -34,6 +36,7 @@ session_start();
             <a href="inscription1.php">Inscription</a></button>
             <a href="connexion.php">Connexion</a></button>
             <a href="profil1.php">Modifier votre profil </a></button> 
+            <a href="https://github.com/tony-guillot/module-connexion.git">Repository Github</a>
    
             </li>
         </ul>
@@ -43,11 +46,24 @@ session_start();
     <button class="indexbutton"><a href="profil1.php">Modifier votre profil </a></button> -->
    
 
-    
-
-
-
     </main>
+
+    <footer class="footer">
+
+        <ul class="navigation">
+            <h3 class="navi">Navigation</h3>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="voyage6.html">Contactez-nous</a></li>
+        </ul>
+
+        <ul class="contact">
+    <h3 class="info">Mes informations</h3>
+    <li>Tony Guillot</li>
+    <li>Tony.guillot@laplateforme.io</li>
+    <li><a href="https://github.com/tony-guillot/module-connexion.git">Repository Github</a></li>
+</ul>
+
+    </footer>
 </body>
 </html>
 
