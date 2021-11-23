@@ -2,9 +2,9 @@
 session_start();
 
 $servname = 'localhost';
-$dbname = 'moduleconnexion';  // log de connexion à la bdd 
-$user = 'root';
-$mdp ='';
+$dbname = 'tony-guillot_moduleconnexion';   // log de connexion à la bdd 
+$user = 'tonyguillot';
+$mdp ='toto199800912';
 
 
  try{
@@ -116,6 +116,8 @@ $mdp ='';
 
              <h3>Prenom : <?php echo @$userinfo['prenom'];?> </h3>
 
+
+        
             
             
             <button ><a href="deconnexion">Se deconnecter</a></button>

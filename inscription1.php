@@ -89,9 +89,10 @@ session_start();
 
 
 $servname = 'localhost';
-$dbname = 'moduleconnexion';  // log de connexion à la bdd 
-$user = 'root';
-$mdp ='';
+$dbname = $dbname = 'tony-guillot_moduleconnexion';    // log de connexion à la bdd 
+$user = 'tonyguillot';
+$mdp ='toto199800912';
+
 
 
 

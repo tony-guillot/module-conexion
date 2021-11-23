@@ -2,9 +2,10 @@
 session_start();
 
 $servname = 'localhost';
-$dbname = 'moduleconnexion';  // log de connexion à la bdd 
-$user = 'root';
-$mdp ='';
+$dbname = 'tony-guillot_moduleconnexion';     // log de connexion à la bdd 
+$user = 'tonyguillot';
+$mdp ='toto199800912';
+
 
 $bdd = new PDO("mysql:host=$servname;dbname=$dbname;charset=utf8","$user","$mdp");//connexion à la bdd
 $bdd-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
