@@ -120,7 +120,7 @@ $mdp ='toto199800912';
         
             
             
-            <button ><a href="deconnexion">Se deconnecter</a></button>
+            <button ><a href="deconnexion.php">Se deconnecter</a></button>
 
             <a href="profil1.php">Modifier mon profil</a>
          </div>
